@@ -21,11 +21,13 @@ namespace AutoTyper {
 				List<Keys> keys = new List<Keys>(ASCIItoKey.get(c));
 				foreach (Keys k in keys) {
 					typer.down(k);
+                    System.Diagnostics.Debug.WriteLine(k);
 				}
 				keys.Reverse();
 				
 				foreach (Keys k in keys) {
 					typer.up(k);
+                    System.Diagnostics.Debug.WriteLine(k);
 				}
 			}
 		}

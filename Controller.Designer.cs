@@ -25,16 +25,20 @@
         private void InitializeComponent() {
             this.DelayLabel = new System.Windows.Forms.Label();
             this.DelayTime = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.MessageLabel = new System.Windows.Forms.Label();
             this.msDelayLabel = new System.Windows.Forms.Label();
             this.IntervalTime = new System.Windows.Forms.NumericUpDown();
             this.IntervalLabel = new System.Windows.Forms.Label();
             this.msLabelInterval = new System.Windows.Forms.Label();
-            this.MessageToType = new System.Windows.Forms.TextBox();
             this.ExecuteButton = new System.Windows.Forms.Button();
             this.ResetButton = new System.Windows.Forms.Button();
+            this.RepeatLabel = new System.Windows.Forms.Label();
+            this.RepeatTimes = new System.Windows.Forms.NumericUpDown();
+            this.InputText = new System.Windows.Forms.RichTextBox();
+            this.TerminateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DelayTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IntervalTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RepeatTimes)).BeginInit();
             this.SuspendLayout();
             // 
             // DelayLabel
@@ -51,18 +55,28 @@
             this.DelayTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DelayTime.Location = new System.Drawing.Point(77, 7);
+            this.DelayTime.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.DelayTime.Name = "DelayTime";
             this.DelayTime.Size = new System.Drawing.Size(272, 21);
             this.DelayTime.TabIndex = 1;
+            this.DelayTime.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             // 
-            // label2
+            // MessageLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Message:";
+            this.MessageLabel.AutoSize = true;
+            this.MessageLabel.Location = new System.Drawing.Point(12, 91);
+            this.MessageLabel.Name = "MessageLabel";
+            this.MessageLabel.Size = new System.Drawing.Size(53, 12);
+            this.MessageLabel.TabIndex = 2;
+            this.MessageLabel.Text = "Message:";
             // 
             // msDelayLabel
             // 
@@ -102,17 +116,6 @@
             this.msLabelInterval.TabIndex = 3;
             this.msLabelInterval.Text = "ms";
             // 
-            // MessageToType
-            // 
-            this.MessageToType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MessageToType.Location = new System.Drawing.Point(14, 79);
-            this.MessageToType.Multiline = true;
-            this.MessageToType.Name = "MessageToType";
-            this.MessageToType.Size = new System.Drawing.Size(358, 142);
-            this.MessageToType.TabIndex = 7;
-            // 
             // ExecuteButton
             // 
             this.ExecuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -122,6 +125,8 @@
             this.ExecuteButton.TabIndex = 8;
             this.ExecuteButton.Text = "&Execute";
             this.ExecuteButton.UseVisualStyleBackColor = true;
+            this.ExecuteButton.EnabledChanged += new System.EventHandler(this.ExecuteEnabled);
+            this.ExecuteButton.Click += new System.EventHandler(this.Execute);
             // 
             // ResetButton
             // 
@@ -133,25 +138,77 @@
             this.ResetButton.Text = "&Reset";
             this.ResetButton.UseVisualStyleBackColor = true;
             // 
+            // RepeatLabel
+            // 
+            this.RepeatLabel.AutoSize = true;
+            this.RepeatLabel.Location = new System.Drawing.Point(12, 63);
+            this.RepeatLabel.Name = "RepeatLabel";
+            this.RepeatLabel.Size = new System.Drawing.Size(47, 12);
+            this.RepeatLabel.TabIndex = 10;
+            this.RepeatLabel.Text = "Repeat:";
+            // 
+            // RepeatTimes
+            // 
+            this.RepeatTimes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RepeatTimes.Location = new System.Drawing.Point(77, 61);
+            this.RepeatTimes.Name = "RepeatTimes";
+            this.RepeatTimes.Size = new System.Drawing.Size(272, 21);
+            this.RepeatTimes.TabIndex = 11;
+            this.RepeatTimes.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // InputText
+            // 
+            this.InputText.AcceptsTab = true;
+            this.InputText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InputText.Location = new System.Drawing.Point(14, 106);
+            this.InputText.Name = "InputText";
+            this.InputText.Size = new System.Drawing.Size(358, 115);
+            this.InputText.TabIndex = 12;
+            this.InputText.Text = "";
+            // 
+            // TerminateButton
+            // 
+            this.TerminateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TerminateButton.Enabled = false;
+            this.TerminateButton.Location = new System.Drawing.Point(93, 227);
+            this.TerminateButton.Name = "TerminateButton";
+            this.TerminateButton.Size = new System.Drawing.Size(75, 23);
+            this.TerminateButton.TabIndex = 13;
+            this.TerminateButton.Text = "&Terminate";
+            this.TerminateButton.UseVisualStyleBackColor = true;
+            this.TerminateButton.Click += new System.EventHandler(this.Terminate);
+            // 
             // Controller
             // 
             this.AcceptButton = this.ExecuteButton;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(384, 262);
+            this.Controls.Add(this.TerminateButton);
+            this.Controls.Add(this.InputText);
+            this.Controls.Add(this.RepeatTimes);
+            this.Controls.Add(this.RepeatLabel);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.ExecuteButton);
-            this.Controls.Add(this.MessageToType);
             this.Controls.Add(this.IntervalLabel);
             this.Controls.Add(this.IntervalTime);
             this.Controls.Add(this.msLabelInterval);
             this.Controls.Add(this.msDelayLabel);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.DelayTime);
             this.Controls.Add(this.DelayLabel);
             this.Name = "Controller";
             this.Text = "AutoTyper";
+            this.Load += new System.EventHandler(this.FormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.DelayTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IntervalTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RepeatTimes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,14 +218,17 @@
 
         private System.Windows.Forms.Label DelayLabel;
         private System.Windows.Forms.NumericUpDown DelayTime;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label MessageLabel;
         private System.Windows.Forms.Label msDelayLabel;
         private System.Windows.Forms.NumericUpDown IntervalTime;
         private System.Windows.Forms.Label IntervalLabel;
         private System.Windows.Forms.Label msLabelInterval;
-        private System.Windows.Forms.TextBox MessageToType;
         private System.Windows.Forms.Button ExecuteButton;
         private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.Label RepeatLabel;
+        private System.Windows.Forms.NumericUpDown RepeatTimes;
+        private System.Windows.Forms.RichTextBox InputText;
+        private System.Windows.Forms.Button TerminateButton;
     }
 }
 
