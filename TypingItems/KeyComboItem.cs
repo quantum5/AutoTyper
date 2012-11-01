@@ -21,6 +21,11 @@ namespace AutoTyper {
             {"WINDOWS", Keys.LWin},
             {"LWIN", Keys.LWin},
             {"RWIN", Keys.RWin},
+            {"PGDN", Keys.PageDown},
+            {"PAGEDOWN", Keys.PageDown},
+            {"PAGEDN", Keys.PageDown},
+            {"PGUP", Keys.PageUp},
+            {"PAGEUP", Keys.PageUp},
         };
 
         public KeyComboItem(string input, Typer typer) {
@@ -39,9 +44,12 @@ namespace AutoTyper {
                         throw new SyntaxError("Invalid Character");
                     keys.Add((Keys)ascii);
                     continue;
-                } else if (!text_to_key.ContainsKey(upper))
+                }
+                try {
+                    keys.Add(text_to_key[upper]);
+                } catch (KeyNotFoundException) {
                     throw new SyntaxError("Invalid key name: " + part);
-                keys.Add(text_to_key[upper]);
+                }
             }
             return keys;
         }
