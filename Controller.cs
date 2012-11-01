@@ -2,6 +2,9 @@
 using System.Windows.Forms;
 using System.Threading;
 using System.Collections.Generic;
+using ICSharpCode.TextEditor;
+using System.Drawing;
+using System.ComponentModel;
 
 namespace AutoTyper {
     struct TypeTask {
@@ -19,6 +22,8 @@ namespace AutoTyper {
         public Controller() {
             InitializeComponent();
             typer = new KeyBDEventTyper();
+
+            this.Icon = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
         }
 
         private void Execute(object sender, System.EventArgs e) {
@@ -36,7 +41,7 @@ namespace AutoTyper {
             task.todo = todo;
             task.delay = (int)DelayTime.Value;
             task.interval = (int)IntervalTime.Value;
-            task.repeats = (int)RepeatTimes.Value;
+            task.repeats = (int)RepeatCount.Value;
             worker.Start(task);
         }
 
@@ -79,7 +84,15 @@ namespace AutoTyper {
 
         private void FormLoad(object sender, EventArgs e) {
             IntervalTime.Maximum = decimal.MaxValue;
-            RepeatTimes.Maximum = decimal.MaxValue;
+            RepeatCount.Maximum = decimal.MaxValue;
+        }
+
+        private void Reset(object sender, EventArgs e) {
+            this.Size = new Size(500, 400);
+            this.DelayTime.Value = 1000;
+            this.IntervalTime.Value = 0;
+            this.RepeatCount.Value = 10;
+            this.InputText.Text = "";
         }
     }
 }

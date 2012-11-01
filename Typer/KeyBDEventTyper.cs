@@ -12,11 +12,13 @@ namespace AutoTyper
         [DllImport("user32.dll")]
         static extern void keybd_event(Keys key, byte scan, uint flags, UIntPtr extra);
 
-        public HashSet<Keys> pressed = new HashSet<Keys>();
+        //public Set<Keys> pressed = new Set<Keys>();
+        public Dictionary<Keys, object> pressed = new Dictionary<Keys, object>();
 
 		public void down(Keys key) {
         	keybd_event(key, 0, 0, UIntPtr.Zero);
-            pressed.Add(key);
+            pressed[key] = null;
+            //presses.Add(key);
 		}
         
 		public void up(Keys key) {
@@ -25,7 +27,7 @@ namespace AutoTyper
 		}
 
         public void releaseall() {
-            foreach (Keys key in pressed) {
+            foreach (Keys key in pressed.Keys) {
                 up(key);
             }
         }

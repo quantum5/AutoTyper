@@ -21,13 +21,15 @@ namespace AutoTyper {
                     case '<': {
                             if (buffer.Length > 0) {
                                 output.Add(new StringItem(buffer.ToString(), typer));
-                                buffer.Clear();
+                                //buffer.clear();
+                                buffer = new StringBuilder();
                             }
                             while (input[++index] != '>')
                                 buffer.Append(input[index]);
                             System.Diagnostics.Debug.Write("Saw Combo: " + buffer.ToString());
                             output.Add(new KeyComboItem(buffer.ToString(), typer));
-                            buffer.Clear();
+                            buffer = new StringBuilder();
+                            //buffer.clear();
                             break;
                         }
                     default:
