@@ -55,7 +55,7 @@ namespace AutoTyper {
 
         static ASCIItoKey() {
             for (int i = 0; i < 10; ++i) {
-                char_to_key[(char)(0x30 + i)] = new List<Keys> { (Keys)(0x30 + 1) };
+                char_to_key[(char)(0x30 + i)] = new List<Keys> { (Keys)(0x30 + i) };
             }
             for (int i = 0; i < 26; ++i) {
                 char_to_key[(char)(0x41 + i)] = new List<Keys> { Keys.ShiftKey, (Keys)(0x41 + i) };

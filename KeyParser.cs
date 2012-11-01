@@ -17,20 +17,24 @@ namespace AutoTyper {
                         System.Diagnostics.Debug.Write("Saw escaped: " + input[index + 1]);
                         buffer.Append(input[++index]);
                         break;
-                    case '<': {
-                            if (buffer.Length > 0) {
-                                output.Add(new StringItem(buffer.ToString(), typer));
-                                //buffer.clear();
-                                buffer = new StringBuilder();
-                            }
-                            while (input[++index] != '>')
-                                buffer.Append(input[index]);
-                            System.Diagnostics.Debug.Write("Saw Combo: " + buffer.ToString());
-                            output.Add(new KeyComboItem(buffer.ToString(), typer));
-                            buffer = new StringBuilder();
+                    case '<':
+                        if (buffer.Length > 0) {
+                            output.Add(new StringItem(buffer.ToString(), typer));
                             //buffer.clear();
-                            break;
+                            buffer = new StringBuilder();
                         }
+                        while (input[++index] != '>')
+                            buffer.Append(input[index]);
+                        string buf = buffer.ToString();
+                        System.Diagnostics.Debug.Write("Saw Combo: " + buf);
+                        if (buf.Contains(" ") || buf == "guid") {
+                            output.Add(new ControlItem(buf, typer));
+                        } else {
+                            output.Add(new KeyComboItem(buf, typer));
+                        }
+                        buffer = new StringBuilder();
+                        //buffer.clear();
+                        break;
                     default:
                         System.Diagnostics.Debug.Write("Saw Text: " + input[index]);
                         buffer.Append(input[index]);

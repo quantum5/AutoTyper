@@ -15,21 +15,23 @@ namespace AutoTyper {
 			this.text = input;
 			this.typer = typer;
 		}
+
+        public static void type(Typer typer, string text) {
+            foreach (char c in text) {
+                List<Keys> keys = new List<Keys>(ASCIItoKey.get(c));
+                foreach (Keys k in keys) {
+                    typer.down(k);
+                }
+                keys.Reverse();
+
+                foreach (Keys k in keys) {
+                    typer.up(k);
+                }
+            }
+        }
 		
 		public void type() {
-			foreach (char c in text) {
-				List<Keys> keys = new List<Keys>(ASCIItoKey.get(c));
-				foreach (Keys k in keys) {
-					typer.down(k);
-                    System.Diagnostics.Debug.WriteLine(k);
-				}
-				keys.Reverse();
-				
-				foreach (Keys k in keys) {
-					typer.up(k);
-                    System.Diagnostics.Debug.WriteLine(k);
-				}
-			}
+            type(this.typer, this.text);
 		}
 	}
 }

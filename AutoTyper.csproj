@@ -61,6 +61,7 @@
     <Compile Include="SyntaxError.cs" />
     <Compile Include="Typer\KeyBDEventTyper.cs" />
     <Compile Include="Typer\Typer.cs" />
+    <Compile Include="TypingItems\ControlItem.cs" />
     <Compile Include="TypingItems\KeyComboItem.cs" />
     <Compile Include="TypingItems\StringItem.cs" />
     <Compile Include="TypingItems\TypeItem.cs" />
