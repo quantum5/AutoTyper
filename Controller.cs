@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using System.Threading;
 using System.Collections.Generic;
-using ICSharpCode.TextEditor;
 using System.Drawing;
 using System.ComponentModel;
 
@@ -63,7 +62,7 @@ namespace AutoTyper {
             } catch (ThreadAbortException) {
                 this.typer.releaseall();
             } finally {
-                this.ExecuteButton.Invoke((Action) delegate {
+                this.ExecuteButton.Invoke((Action<Control>) delegate {
                     this.ExecuteButton.Enabled = true;
                 });
             }

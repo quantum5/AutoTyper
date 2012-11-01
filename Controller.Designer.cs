@@ -35,7 +35,7 @@
             this.RepeatLabel = new System.Windows.Forms.Label();
             this.RepeatCount = new System.Windows.Forms.NumericUpDown();
             this.TerminateButton = new System.Windows.Forms.Button();
-            this.InputText = new ICSharpCode.TextEditor.TextEditorControl();
+            this.InputText = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DelayTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IntervalTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RepeatCount)).BeginInit();
@@ -148,12 +148,12 @@
             this.RepeatLabel.TabIndex = 10;
             this.RepeatLabel.Text = "Repeat:";
             // 
-            // RepeatTimes
+            // RepeatCount
             // 
             this.RepeatCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RepeatCount.Location = new System.Drawing.Point(77, 61);
-            this.RepeatCount.Name = "RepeatTimes";
+            this.RepeatCount.Name = "RepeatCount";
             this.RepeatCount.Size = new System.Drawing.Size(372, 21);
             this.RepeatCount.TabIndex = 11;
             this.RepeatCount.Value = new decimal(new int[] {
@@ -179,17 +179,19 @@
             this.InputText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.InputText.IsReadOnly = false;
+            this.InputText.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.InputText.Location = new System.Drawing.Point(14, 106);
             this.InputText.Name = "InputText";
             this.InputText.Size = new System.Drawing.Size(458, 215);
-            this.InputText.TabIndex = 12;
+            this.InputText.TabIndex = 14;
+            this.InputText.Text = "";
             // 
             // Controller
             // 
             this.AcceptButton = this.ExecuteButton;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(484, 362);
+            this.Controls.Add(this.InputText);
             this.Controls.Add(this.TerminateButton);
             this.Controls.Add(this.RepeatCount);
             this.Controls.Add(this.RepeatLabel);
@@ -202,7 +204,6 @@
             this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.DelayTime);
             this.Controls.Add(this.DelayLabel);
-            this.Controls.Add(this.InputText);
             this.Name = "Controller";
             this.Text = "AutoTyper";
             this.Load += new System.EventHandler(this.FormLoad);
@@ -228,7 +229,7 @@
         private System.Windows.Forms.Label RepeatLabel;
         private System.Windows.Forms.NumericUpDown RepeatCount;
         private System.Windows.Forms.Button TerminateButton;
-        private ICSharpCode.TextEditor.TextEditorControl InputText;
+        private System.Windows.Forms.RichTextBox InputText;
     }
 }
 
