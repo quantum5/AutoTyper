@@ -22,7 +22,7 @@ namespace AutoTyper {
         private static Random random = new Random();
 
         private string RandomString(int size) {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder(size);
             for (int i = 0; i < size; i++)
                 builder.Append((char)random.Next(0x21, 0x7F));
             return builder.ToString();
