@@ -21,7 +21,8 @@ namespace AutoTyper {
 
         public Controller() {
             InitializeComponent();
-            typer = new KeyBDEventTyper();
+            //typer = new KeyBDEventTyper();
+            typer = new SendInputTyper();
 
             this.Icon = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
         }
@@ -46,6 +47,10 @@ namespace AutoTyper {
         }
 
         void DoType(object obj) {
+#if DEBUG
+            System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+            stopWatch.Start();
+#endif
             try {
                 TypeTask task = (TypeTask)obj;
                 Thread.Sleep(task.delay);
@@ -63,6 +68,10 @@ namespace AutoTyper {
             } catch (ThreadAbortException) {
                 this.typer.releaseall();
             } finally {
+#if DEBUG
+                stopWatch.Stop();
+                System.Diagnostics.Debug.WriteLine("Task Completed in: " + stopWatch.ElapsedMilliseconds);
+#endif
                 SetControlPropertyThreadSafe(this.ExecuteButton, "Enabled", true);
             }
         }
@@ -93,6 +102,46 @@ namespace AutoTyper {
         private void FormLoad(object sender, EventArgs e) {
             IntervalTime.Maximum = decimal.MaxValue;
             RepeatCount.Maximum = decimal.MaxValue;
+
+
+            Font monospace;
+            try {
+                monospace = new Font(new FontFamily("Consolas"), 12);
+            } catch (ArgumentException) {
+                monospace = new Font(FontFamily.GenericMonospace, 12);
+            }
+            InputText.Font = monospace;
+
+            ContextMenu menu = new ContextMenu();
+            menu.MenuItems.Add("&Undo", new EventHandler((o, ea) => {
+                InputText.Undo();
+                menu.MenuItems[1].Enabled = InputText.CanRedo;
+            }));
+            menu.MenuItems.Add("&Redo", new EventHandler((o, ea) => {
+                InputText.Redo();
+                menu.MenuItems[1].Enabled = InputText.CanRedo;
+            }));
+            menu.MenuItems[1].Enabled = false;
+            menu.MenuItems.Add("-");
+            menu.MenuItems.Add("C&ut", new EventHandler((o, ea) => InputText.Cut()));
+            menu.MenuItems.Add("&Copy", new EventHandler((o, ea) => InputText.Copy()));
+            menu.MenuItems.Add("&Paste", new EventHandler((o, ea) => InputText.Paste()));
+            menu.MenuItems.Add("&Delete", new EventHandler((o, ea) => InputText.SelectedText = String.Empty));
+            menu.MenuItems.Add("-");
+            menu.MenuItems.Add("&Select All", new EventHandler((o, ea) => InputText.SelectAll()));
+            menu.MenuItems.Add("-");
+            menu.MenuItems.Add("Insert &GUID", new EventHandler((o, ea) => InputText.SelectedText = "<guid>"));
+            menu.MenuItems.Add("Insert &Random String", new EventHandler((o, ea) => {
+                InputText.SelectedText = "<random 10>";
+                InputText.SelectionStart -= 3;
+                InputText.SelectionLength = 2;
+            }));
+            menu.MenuItems.Add("Insert &Sleep (ms)", new EventHandler((o, ea) => {
+                InputText.SelectedText = "<random 1000>";
+                InputText.SelectionStart -= 5;
+                InputText.SelectionLength = 4;
+            }));
+            InputText.ContextMenu = menu;
         }
 
         private void Reset(object sender, EventArgs e) {

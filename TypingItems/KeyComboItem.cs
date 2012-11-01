@@ -82,6 +82,7 @@ namespace AutoTyper {
             for (int i = keys.Count; i > 0;) {
                 typer.up(keys[--i]);
             }
+            typer.flush();
         }
     }
 }

@@ -40,16 +40,17 @@ namespace AutoTyper {
                     break;
                 case "random":
                     try {
-                        StringItem.type(typer, RandomString(int.Parse(arguments[0])));
+                        typer.text(RandomString(int.Parse(arguments[0])));
                     } catch (Exception e) {
                         System.Diagnostics.Debug.WriteLine(e.ToString());
-                        StringItem.type(typer, RandomString(int.Parse(arguments[0])));
+                        typer.text(RandomString(int.Parse(arguments[0])));
                     }
                     break;
                 case "guid":
-                    StringItem.type(typer, Guid.NewGuid().ToString());
+                    typer.text(Guid.NewGuid().ToString());
                     break;
             }
+            typer.flush();
         }
     }
 }

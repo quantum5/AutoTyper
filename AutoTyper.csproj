@@ -71,6 +71,7 @@
     <Compile Include="KeyParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendInput.cs" />
     <Compile Include="SyntaxError.cs" />
     <Compile Include="Typer\KeyBDEventTyper.cs" />
     <Compile Include="Typer\SendInputTyper.cs" />
