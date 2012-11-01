@@ -31,5 +31,9 @@ namespace AutoTyper
                 up(key);
             }
         }
+        
+        public void flush() {
+        	// does nothing
+        }
 	}
 }
