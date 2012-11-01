@@ -36,6 +36,11 @@
             this.RepeatCount = new System.Windows.Forms.NumericUpDown();
             this.TerminateButton = new System.Windows.Forms.Button();
             this.InputText = new System.Windows.Forms.RichTextBox();
+            this.LoadScriptLabel = new System.Windows.Forms.Label();
+            this.ScriptLocation = new System.Windows.Forms.TextBox();
+            this.BrowseScript = new System.Windows.Forms.Button();
+            this.LoadButton = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DelayTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IntervalTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RepeatCount)).BeginInit();
@@ -183,15 +188,66 @@
             this.InputText.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.InputText.Location = new System.Drawing.Point(14, 106);
             this.InputText.Name = "InputText";
-            this.InputText.Size = new System.Drawing.Size(458, 215);
+            this.InputText.Size = new System.Drawing.Size(458, 188);
             this.InputText.TabIndex = 14;
             this.InputText.Text = "";
+            // 
+            // LoadScriptLabel
+            // 
+            this.LoadScriptLabel.AutoSize = true;
+            this.LoadScriptLabel.Location = new System.Drawing.Point(12, 303);
+            this.LoadScriptLabel.Name = "LoadScriptLabel";
+            this.LoadScriptLabel.Size = new System.Drawing.Size(77, 12);
+            this.LoadScriptLabel.TabIndex = 15;
+            this.LoadScriptLabel.Text = "Load Script:";
+            // 
+            // ScriptLocation
+            // 
+            this.ScriptLocation.Location = new System.Drawing.Point(95, 300);
+            this.ScriptLocation.Name = "ScriptLocation";
+            this.ScriptLocation.Size = new System.Drawing.Size(296, 21);
+            this.ScriptLocation.TabIndex = 16;
+            // 
+            // BrowseScript
+            // 
+            this.BrowseScript.Location = new System.Drawing.Point(397, 300);
+            this.BrowseScript.Name = "BrowseScript";
+            this.BrowseScript.Size = new System.Drawing.Size(75, 23);
+            this.BrowseScript.TabIndex = 17;
+            this.BrowseScript.Text = "&Browse...";
+            this.BrowseScript.UseVisualStyleBackColor = true;
+            this.BrowseScript.Click += new System.EventHandler(this.BrowseForScript);
+            // 
+            // LoadButton
+            // 
+            this.LoadButton.Location = new System.Drawing.Point(174, 327);
+            this.LoadButton.Name = "LoadButton";
+            this.LoadButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadButton.TabIndex = 18;
+            this.LoadButton.Text = "&Load";
+            this.LoadButton.UseVisualStyleBackColor = true;
+            this.LoadButton.Click += new System.EventHandler(this.LoadScript);
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(255, 327);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 19;
+            this.SaveButton.Text = "&Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveScript);
             // 
             // Controller
             // 
             this.AcceptButton = this.ExecuteButton;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(484, 362);
+            this.Controls.Add(this.SaveButton);
+            this.Controls.Add(this.LoadButton);
+            this.Controls.Add(this.BrowseScript);
+            this.Controls.Add(this.ScriptLocation);
+            this.Controls.Add(this.LoadScriptLabel);
             this.Controls.Add(this.InputText);
             this.Controls.Add(this.TerminateButton);
             this.Controls.Add(this.RepeatCount);
@@ -231,6 +287,11 @@
         private System.Windows.Forms.NumericUpDown RepeatCount;
         private System.Windows.Forms.Button TerminateButton;
         private System.Windows.Forms.RichTextBox InputText;
+        private System.Windows.Forms.Label LoadScriptLabel;
+        private System.Windows.Forms.TextBox ScriptLocation;
+        private System.Windows.Forms.Button BrowseScript;
+        private System.Windows.Forms.Button LoadButton;
+        private System.Windows.Forms.Button SaveButton;
     }
 }
 

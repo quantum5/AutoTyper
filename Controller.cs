@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Threading;
 using System.Collections.Generic;
 using System.Drawing;
-using System.ComponentModel;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
+using System.Text;
 
 namespace AutoTyper {
     struct TypeTask {
@@ -100,6 +101,37 @@ namespace AutoTyper {
             this.IntervalTime.Value = 0;
             this.RepeatCount.Value = 10;
             this.InputText.Text = "";
+        }
+
+        private void BrowseForScript(object sender, EventArgs e) {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.FileName = ScriptLocation.Text;
+            dialog.Filter = "Type Script File (*.tps)|*.tps|All Files (*.*)|*.*";
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                ScriptLocation.Text = dialog.FileName;
+            }
+        }
+
+        private void LoadScript(object sender, EventArgs e) {
+            try {
+                InputText.Text = File.ReadAllText(ScriptLocation.Text, Encoding.UTF8);
+            } catch (IOException err) {
+                MessageBox.Show(err.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SaveScript(object sender, EventArgs e) {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.FileName = ScriptLocation.Text;
+            dialog.Filter = "Type Script File (*.tps)|*.tps|All Files (*.*)|*.*";
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                ScriptLocation.Text = dialog.FileName;
+            }
+            try {
+                File.WriteAllText(ScriptLocation.Text, InputText.Text, Encoding.UTF8);
+            } catch (IOException err) {
+                MessageBox.Show(err.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
