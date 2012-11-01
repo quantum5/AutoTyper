@@ -61,10 +61,6 @@ namespace AutoTyper {
                 char_to_key[(char)(0x41 + i)] = new List<Keys> { Keys.ShiftKey, (Keys)(0x41 + i) };
                 char_to_key[(char)(0x61 + i)] = new List<Keys> { (Keys)(0x41 + i) };
             }
-#if DEBUG
-            foreach (var key in char_to_key.Keys)
-                System.Diagnostics.Debug.WriteLine("    {'" + key + "': " + String.Join(", ", char_to_key[key]) + "},");
-#endif
         }
 
         public static List<Keys> get(char ch) {

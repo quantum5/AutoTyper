@@ -62,9 +62,17 @@ namespace AutoTyper {
             } catch (ThreadAbortException) {
                 this.typer.releaseall();
             } finally {
-                this.ExecuteButton.Invoke((Action<Control>) delegate {
-                    this.ExecuteButton.Enabled = true;
-                });
+                SetControlPropertyThreadSafe(this.ExecuteButton, "Enabled", true);
+            }
+        }
+
+        private delegate void SetControlPropertyThreadSafeDelegate(Control control, string propertyName, object propertyValue);
+
+        public static void SetControlPropertyThreadSafe(Control control, string propertyName, object propertyValue) {
+            if (control.InvokeRequired) {
+                control.Invoke(new SetControlPropertyThreadSafeDelegate(SetControlPropertyThreadSafe), new object[] { control, propertyName, propertyValue });
+            } else {
+                control.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, control, new object[] { propertyValue });
             }
         }
 
