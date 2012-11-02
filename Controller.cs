@@ -137,7 +137,7 @@ namespace AutoTyper {
                 InputText.SelectionLength = 2;
             }));
             menu.MenuItems.Add("Insert &Sleep (ms)", new EventHandler((o, ea) => {
-                InputText.SelectedText = "<random 1000>";
+                InputText.SelectedText = "<sleep 1000>";
                 InputText.SelectionStart -= 5;
                 InputText.SelectionLength = 4;
             }));
