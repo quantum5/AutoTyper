@@ -1,6 +1,7 @@
 FILE=ASCIItoKey.cs \
      Controller.Designer.cs \
      Controller.cs \
+     FocusControl.cs \
      KeyParser.cs \
      Program.cs \
      SendInput.cs \

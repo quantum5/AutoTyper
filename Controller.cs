@@ -43,6 +43,7 @@ namespace AutoTyper {
             task.delay = (int)DelayTime.Value;
             task.interval = (int)IntervalTime.Value;
             task.repeats = (int)RepeatCount.Value;
+            FocusControl.FocusWindowUnder();
             worker.Start(task);
         }
 
